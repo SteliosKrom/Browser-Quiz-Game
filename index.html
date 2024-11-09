@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Παιχνίδι Γνώσεων</title>
+    <title>Quiz Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="quiz-container">
-        <h1>Παιχνίδι Γνώσεων</h1>
-        <div id="question-container">
-            <p id="question-text">Εδώ θα εμφανίζεται η ερώτηση</p>
-            <div id="options-container">
-                <!-- Εδώ θα εμφανίζονται οι επιλογές απάντησης -->
+    <div class="quiz-container">
+        <h1>Καλωσήρθατε στο Κουίζ Γνώσεων!</h1>
+        <div id="quiz">
+            <p id="question">Ερώτηση θα εμφανιστεί εδώ</p>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(0)">Α</button>
+                <button class="option" onclick="selectAnswer(1)">Β</button>
+                <button class="option" onclick="selectAnswer(2)">Γ</button>
+                <button class="option" onclick="selectAnswer(3)">Δ</button>
             </div>
+            <p id="feedback"></p>
+            <p id="score">Βαθμολογία: 0</p>
+            <p id="timer">Χρόνος: 10</p>
+            <button id="next-question" onclick="nextQuestion()">Επόμενη Ερώτηση</button>
         </div>
-        <button id="next-button" onclick="nextQuestion()">Επόμενη Ερώτηση</button>
-        <p id="score-display">Βαθμολογία: 0</p>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+

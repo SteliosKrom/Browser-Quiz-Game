@@ -1,62 +1,72 @@
 const questions = [
     {
-        question: "Ποιος ειναι ο θεος του πολεμου στην Ελληνικη Μυθοδολογια;",
-        options: ["Δίας", "Άρης", "Ήφαιστος", "Ερμής"],
-        answer: "Άρης"
+        question: "Ποια είναι η πρωτεύουσα της Ελλάδας;",
+        options: ["Αθήνα", "Θεσσαλονίκη", "Πάτρα", "Ηράκλειο"],
+        answer: 0
     },
     {
-        question: "Ποιά χώρα έχει τον περισσότερο πληθυσμό στον κόσμο;",
-        options: ["Ρωσία", "Αμερική", "Ινδία", "Κίνα"],
-        answer: "Ινδία"
+        question: "Ποιος είναι ο μεγαλύτερος πλανήτης του ηλιακού μας συστήματος;",
+        options: ["Γη", "Άρης", "Δίας", "Κρόνος"],
+        answer: 2
     },
     {
-        question: "Πότε ξεκίνησε ο Α'παγκόσμιος πόλεμος;",
-        options: ["1912", "1914", "1910", "1918"],
-        answer: "1914"
+        question: "Ποια είναι η μεγαλύτερη ήπειρος;",
+        options: ["Ευρώπη", "Ασία", "Αφρική", "Αμερική"],
+        answer: 1
     },
     {
-        question: "Ποιά δημοφιλής ξένη συγγραφέας έγραψε αστυνομική λογοτεχνία;",
-        options: ["Αγάθα Κρίστι", "Τζ.Κ.Ρόουλινγκ", "Στέφεν Κίνγκ", "Τζέιν Όστιν"],
-        answer: "Αγάθα Κρίστι"
+        question: "Ποιο είναι το πιο γρήγορο ζώο στη στεριά;",
+        options: ["Λιοντάρι", "Γατόπαρδος", "Άλογο", "Λύκος"],
+        answer: 1
     },
     {
-        question: "Ποιό είναι το πιο δημοφιλές λειτουργικό σύστημα στον κόσμο;",
-        options: ["macOS", "Windows", "Linux", "ChromeOS"],
-        answer: "Windows"
+        question: "Πόσες ώρες έχει μία ημέρα;",
+        options: ["10", "12", "24", "30"],
+        answer: 2
     }
 ];
 
 let currentQuestionIndex = 0;
 let score = 0;
+let timeLeft = 10;
+let timer;
 
 function loadQuestion() {
-    const question = questions[currentQuestionIndex];
-    document.getElementById("question-text").innerText = question.question;
-    
-    const optionsContainer = document.getElementById("options-container");
-    optionsContainer.innerHTML = ""; // Καθαρισμός παλαιών επιλογών
-
-    question.options.forEach(option => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.onclick = function() { checkAnswer(option); };
-        optionsContainer.appendChild(button);
+    clearInterval(timer);
+    timeLeft = 10;
+    document.getElementById("timer").textContent = `Χρόνος: ${timeLeft}`;
+    const questionData = questions[currentQuestionIndex];
+    document.getElementById("question").textContent = questionData.question;
+    const options = document.querySelectorAll(".option");
+    options.forEach((button, index) => {
+        button.textContent = questionData.options[index];
     });
-
-    document.getElementById("score-display").innerText = `Βαθμολογία: ${score}`;
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("next-question").style.display = "none";
+    timer = setInterval(updateTimer, 1000);
 }
 
-function checkAnswer(selectedAnswer) {
-    const correctAnswer = questions[currentQuestionIndex].answer;
-    if (selectedAnswer === correctAnswer) {
-        score++;
+function updateTimer() {
+    timeLeft--;
+    document.getElementById("timer").textContent = `Χρόνος: ${timeLeft}`;
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById("feedback").textContent = "Χρόνος εξαντλήθηκε!";
+        document.getElementById("next-question").style.display = "block";
     }
+}
 
-    // Απενεργοποίηση των κουμπιών μετά την επιλογή
-    const buttons = document.querySelectorAll("#options-container button");
-    buttons.forEach(button => button.disabled = true);
-
-    setTimeout(nextQuestion, 1000); // Αναμονή 1 δευτερολέπτου πριν την επόμενη ερώτηση
+function selectAnswer(index) {
+    clearInterval(timer);
+    const questionData = questions[currentQuestionIndex];
+    if (index === questionData.answer) {
+        document.getElementById("feedback").textContent = "Σωστό!";
+        score++;
+    } else {
+        document.getElementById("feedback").textContent = "Λάθος!";
+    }
+    document.getElementById("score").textContent = `Βαθμολογία: ${score}`;
+    document.getElementById("next-question").style.display = "block";
 }
 
 function nextQuestion() {
@@ -64,12 +74,12 @@ function nextQuestion() {
     if (currentQuestionIndex < questions.length) {
         loadQuestion();
     } else {
-        alert(`Τέλος του παιχνιδιού! Η τελική σας βαθμολογία είναι: ${score}`);
-        // Επαναφορά για νέο παιχνίδι
-        currentQuestionIndex = 0;
-        score = 0;
-        loadQuestion();
+        document.getElementById("question").textContent = "Τέλος παιχνιδιού!";
+        document.getElementById("feedback").textContent = `Τελική Βαθμολογία: ${score} από ${questions.length}`;
+        document.querySelector(".options").style.display = "none";
+        document.getElementById("timer").style.display = "none";
+        document.getElementById("next-question").style.display = "none";
     }
 }
 
-loadQuestion();
+window.onload = loadQuestion;
