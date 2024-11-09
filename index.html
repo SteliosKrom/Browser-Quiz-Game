@@ -8,22 +8,40 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Καλωσήρθατε στο Κουίζ Γνώσεων!</h1>
-        <div id="quiz">
-            <p id="question">Ερώτηση θα εμφανιστεί εδώ</p>
-            <div class="options">
-                <button class="option" onclick="selectAnswer(0)">Α</button>
-                <button class="option" onclick="selectAnswer(1)">Β</button>
-                <button class="option" onclick="selectAnswer(2)">Γ</button>
-                <button class="option" onclick="selectAnswer(3)">Δ</button>
+        <!-- Welcome Screen -->
+        <div id="welcome-screen">
+            <h1>Καλώς ήρθατε στο Quiz Γνώσεων</h1>
+            <button onclick="startQuiz()">Παίξε</button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" style="display: none;">
+            <h1>Quiz Γνώσεων</h1>
+            <div id="quiz">
+                <p id="question">Ερώτηση θα εμφανιστεί εδώ</p>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(0)">Α</button>
+                    <button class="option" onclick="selectAnswer(1)">Β</button>
+                    <button class="option" onclick="selectAnswer(2)">Γ</button>
+                    <button class="option" onclick="selectAnswer(3)">Δ</button>
+                </div>
+                <p id="feedback"></p>
+                <p id="score">Βαθμολογία: 0</p>
+                <p id="timer">Χρόνος: 10</p>
+                <button id="next-question" onclick="nextQuestion()">Επόμενη Ερώτηση</button>
             </div>
-            <p id="feedback"></p>
-            <p id="score">Βαθμολογία: 0</p>
-            <p id="timer">Χρόνος: 10</p>
-            <button id="next-question" onclick="nextQuestion()">Επόμενη Ερώτηση</button>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-screen" style="display: none;">
+            <h2>Τέλος παιχνιδιού!</h2>
+            <p id="final-score"></p>
+            <button onclick="restartQuiz()">Ξαναπαίξε</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
 

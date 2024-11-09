@@ -31,6 +31,12 @@ let score = 0;
 let timeLeft = 10;
 let timer;
 
+function startQuiz() {
+    document.getElementById("welcome-screen").style.display = "none";
+    document.getElementById("quiz-screen").style.display = "block";
+    loadQuestion();
+}
+
 function loadQuestion() {
     clearInterval(timer);
     timeLeft = 10;
@@ -74,12 +80,24 @@ function nextQuestion() {
     if (currentQuestionIndex < questions.length) {
         loadQuestion();
     } else {
-        document.getElementById("question").textContent = "Τέλος παιχνιδιού!";
-        document.getElementById("feedback").textContent = `Τελική Βαθμολογία: ${score} από ${questions.length}`;
-        document.querySelector(".options").style.display = "none";
-        document.getElementById("timer").style.display = "none";
-        document.getElementById("next-question").style.display = "none";
+        endQuiz();
     }
 }
 
-window.onload = loadQuestion;
+function endQuiz() {
+    document.getElementById("quiz-screen").style.display = "none";
+    document.getElementById("end-screen").style.display = "block";
+    document.getElementById("final-score").textContent = `Τελική Βαθμολογία: ${score} από ${questions.length}`;
+}
+
+function restartQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById("end-screen").style.display = "none";
+    document.getElementById("quiz-screen").style.display = "block";
+    loadQuestion();
+}
+
+window.onload = () => {
+    document.getElementById("score").textContent = `Βαθμολογία: ${score}`;
+};
