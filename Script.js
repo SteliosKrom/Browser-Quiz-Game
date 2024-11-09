@@ -93,6 +93,7 @@ function endQuiz() {
 function restartQuiz() {
     currentQuestionIndex = 0;
     score = 0;
+    document.getElementById("score").textContent = `Βαθμολογία: ${score}`;
     document.getElementById("end-screen").style.display = "none";
     document.getElementById("quiz-screen").style.display = "block";
     loadQuestion();
