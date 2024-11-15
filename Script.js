@@ -24,6 +24,31 @@ const questions = [
         options: ["10", "12", "24", "30"],
         answer: 2
     }
+    {
+        question: "Πότε έγινε η Άλωση της Κωνσταντινούπολης;",
+        options: ["1430", "1453", "1421", "1443"],
+        answer: 1
+    }
+    {
+        question: "Ποιός δημιούργησε την Γλώσσα Προγραμματισμού C;"
+        options: ["Brian Kernighan", "Dennis Ritchie", "Bjarne Stroustrup", "Ken Thompson"]
+        answer: 1
+    }
+    {
+        question "Ποια γλώσσα προγραμματισμού χρησιμοποιήθηκε για τη δημιουργία του πρώτου ιστότοπου;"
+        options: ["HTML", "C++", "Java", "Python"]
+        answer: 0
+    }
+    {
+        question: "Πότε έγινε η ιστορική Μάχη των Θερμοπυλών, όπου ο Λεωνίδας και οι 300 Σπαρτιάτες αντιμετώπισαν τον περσικό στρατό;"
+        options: ["480 π.Χ", "500 π.Χ", "400 π.Χ", "300 π.Χ"]
+        answer: 0
+    }
+    {
+        question: "Ποιο από τα παρακάτω είναι το χημικό σύμβολο του νερού;"
+        options: ["H₂O", "CO₂", "NaCl", "O₂"]
+        answer: 0
+    }
 ];
 
 let currentQuestionIndex = 0;
