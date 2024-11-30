@@ -17,7 +17,8 @@ body {
     text-align: center;
 }
 
-h1, h2 {
+h1, h2
+{
     font-size: 1.8em;
     margin-bottom: 20px;
 }
